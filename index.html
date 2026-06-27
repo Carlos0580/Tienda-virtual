@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C&C SHOE SALES</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container d-flex justify-content-center global-wrapper">
+    <div class="product-card text-center">
+        <h2 class="fw-bold text-uppercase fs-4 mb-3">C&C SHOE SALES</h2>
+        
+        <div class="d-flex justify-content-center mb-4">
+            <span class="color-dot dot-white active" data-color="blanco" data-bs-toggle="tooltip" title="Cuero Blanco con relieve Dorado"></span>
+            <span class="color-dot dot-black" data-color="negro" data-bs-toggle="tooltip" title="Cuero Negro con relieve Blanco"></span>
+            <span class="color-dot dot-yellow" data-color="amarillo" data-bs-toggle="tooltip" title="Cuero Amarillo con relieve Blanco"></span>
+            <span class="color-dot dot-rojo" data-color="rojo" data-bs-toggle="tooltip" title="Cuero Rojo con relieve Blanco"></span>
+        </div>
+
+        <div class="img-container mb-4" data-bs-toggle="modal" data-bs-target="#imageModal">
+            <img src="img/Jordan blanco con gris.jpg" id="mainProductImg" class="product-img" alt="Carlos-Sport">
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label fw-semibold text-muted small d-block mb-2">SELECCIONE SU TALLA</label>
+            <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="talla" id="t38" checked>
+                <label class="btn btn-outline-dark" for="t38">38</label>
+                
+                <input type="radio" class="btn-check" name="talla" id="t40">
+                <label class="btn btn-outline-dark" for="t40">40</label>
+                
+                <input type="radio" class="btn-check" name="talla" id="t42">
+                <label class="btn btn-outline-dark" for="t42">42</label>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mt-4">
+            <span class="fs-3 fw-bold text-dark">$190 USD</span>
+            <button class="btn btn-dark btn-lg px-4 fw-semibold rounded-3">COMPRAR</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-90">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-header border-0 p-0 justify-content-end">
+                <button type="button" class="btn-close btn-close-white fs-4 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-0">
+                <img src="img/Jordan blanco con gris.jpg" id="modalProductImg" class="w-100 modal-body-img" alt="Vista Detallada">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
