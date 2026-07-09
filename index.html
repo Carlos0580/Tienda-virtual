@@ -3,63 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C&C SHOE SALES</title>
+    <meta name="description" content="ShopMaster C&C - La tienda virtual premium impulsada por Inteligencia Artificial y desarrollada por el Ing. Carlos Sanchez.">
+    <title>ShopMaster C&C | Tienda Virtual Premium</title>
+    
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Devicon (Official Tech Icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="container d-flex justify-content-center global-wrapper">
-    <div class="product-card text-center">
-        <h2 class="fw-bold text-uppercase fs-4 mb-3">C&C SHOE SALES</h2>
+    <!-- Header / Glassmorphism Navigation Bar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#" id="navbar-brand-logo">
+                <span class="fs-3 me-2">🛒</span>
+                <span>Shop<span class="brand-accent">MasterC&C</span></span>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-semibold" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#products-section">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#tech-footer">Acerca del Creador</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-primary-custom d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" id="nav-cart-btn">
+                            <i class="fa-solid fa-cart-shopping me-2"></i> Mi Carrito
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-section text-center text-md-start">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-7">
+                    <h1 class="hero-title mb-3">La Nueva Era del <span class="brand-accent">E-Commerce</span> Inteligente</h1>
+                    <p class="lead text-muted mb-4">Explora productos reales en una experiencia de tienda fluida e integrada con pasarela simulada y facturación automática en PDF.</p>
+                    <a href="#products-section" class="btn btn-primary-custom btn-lg px-4 py-2 shadow-sm">
+                        <i class="fa-solid fa-bag-shopping me-2"></i>Comprar Ahora
+                    </a>
+                </div>
+                <div class="col-12 col-md-5 d-none d-md-block text-center">
+                    <div style="font-size: 8rem; animation: floatAnim 4s ease-in-out infinite;">🛍️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Store Section -->
+    <main class="container my-5" id="products-section">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-2">Catálogo de Productos</h2>
+            <p class="text-muted">Consumiendo tiempo real desde FakeStoreAPI</p>
+            <div class="mx-auto" style="width: 60px; height: 4px; background-color: var(--primary-color); border-radius: 2px;"></div>
+        </div>
         
-        <div class="d-flex justify-content-center mb-4">
-            <span class="color-dot dot-white active" data-color="blanco" data-bs-toggle="tooltip" title="Cuero Blanco con relieve Dorado"></span>
-            <span class="color-dot dot-black" data-color="negro" data-bs-toggle="tooltip" title="Cuero Negro con relieve Blanco"></span>
-            <span class="color-dot dot-yellow" data-color="amarillo" data-bs-toggle="tooltip" title="Cuero Amarillo con relieve Blanco"></span>
-            <span class="color-dot dot-rojo" data-color="rojo" data-bs-toggle="tooltip" title="Cuero Rojo con relieve Blanco"></span>
+        <!-- Products Grid Container -->
+        <div class="row" id="products-container">
+            <!-- Dynamically populated via JS -->
         </div>
+    </main>
 
-        <div class="img-container mb-4" data-bs-toggle="modal" data-bs-target="#imageModal">
-            <img src="img/Jordan blanco con gris.jpg" id="mainProductImg" class="product-img" alt="Carlos-Sport">
+    <!-- Floating Cart Trigger Button -->
+    <button class="floating-cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" id="floating-cart-trigger" title="Ver carrito de compras">
+        <i class="fa-solid fa-cart-shopping fs-4"></i>
+        <span class="badge-counter" id="cart-count-badge" style="display: none;">0</span>
+    </button>
+
+    <!-- Offcanvas Cart Sidebar -->
+    <div class="offcanvas offcanvas-end offcanvas-cart" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">
+                <i class="fa-solid fa-cart-flatbed me-2 text-primary"></i>Tu Carrito
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
         </div>
-
-        <div class="mb-4">
-            <label class="form-label fw-semibold text-muted small d-block mb-2">SELECCIONE SU TALLA</label>
-            <div class="btn-group w-100" role="group">
-                <input type="radio" class="btn-check" name="talla" id="t38" checked>
-                <label class="btn btn-outline-dark" for="t38">38</label>
-                
-                <input type="radio" class="btn-check" name="talla" id="t40">
-                <label class="btn btn-outline-dark" for="t40">40</label>
-                
-                <input type="radio" class="btn-check" name="talla" id="t42">
-                <label class="btn btn-outline-dark" for="t42">42</label>
+        
+        <div class="offcanvas-body d-flex flex-column">
+            <!-- Items Container -->
+            <div class="flex-grow-1 overflow-y-auto" id="cart-items-container">
+                <!-- Dynamically populated via JS -->
             </div>
-        </div>
-
-        <div class="d-flex align-items-center justify-content-between mt-4">
-            <span class="fs-3 fw-bold text-dark">$190 USD</span>
-            <button class="btn btn-dark btn-lg px-4 fw-semibold rounded-3">COMPRAR</button>
+            
+            <!-- Cart Footer Summary -->
+            <div class="border-top pt-3 mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="fw-semibold text-muted">Total acumulado:</span>
+                    <span class="fs-4 fw-bold text-dark" id="cart-total-amount">$0.00</span>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success-custom py-3" id="checkout-btn" disabled>
+                        <i class="fa-solid fa-credit-card me-2"></i>Ir a pagar
+                    </button>
+                    <button class="btn btn-light" data-bs-dismiss="offcanvas">
+                        Continuar comprando
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-90">
-        <div class="modal-content bg-transparent border-0">
-            <div class="modal-header border-0 p-0 justify-content-end">
-                <button type="button" class="btn-close btn-close-white fs-4 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center p-0">
-                <img src="img/Jordan blanco con gris.jpg" id="modalProductImg" class="w-100 modal-body-img" alt="Vista Detallada">
+    <!-- Product Details Modal -->
+    <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 1.5rem;">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-3 mb-md-0 bg-white p-3 rounded-4" style="height: 300px;">
+                            <img id="modal-product-img" src="" alt="" class="img-fluid mh-100" style="object-fit: contain;">
+                        </div>
+                        <div class="col-12 col-md-7 d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="fw-bold mb-2" id="modal-product-title"></h3>
+                                <p class="text-primary mb-3" id="modal-product-category"></p>
+                                <p class="text-muted" id="modal-product-description"></p>
+                            </div>
+                            
+                            <div class="border-top pt-3 mt-3">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <span class="fs-2 fw-bold text-dark" id="modal-product-price"></span>
+                                    
+                                    <!-- Quantity selector -->
+                                    <div class="d-flex align-items-center border rounded-3 overflow-hidden">
+                                        <button class="btn btn-light border-0 px-3 py-2 fw-bold" id="modal-qty-minus">-</button>
+                                        <input type="text" class="form-control border-0 text-center fw-bold bg-white" id="modal-qty-select" value="1" readonly style="width: 50px;">
+                                        <button class="btn btn-light border-0 px-3 py-2 fw-bold" id="modal-qty-plus">+</button>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary-custom py-3" id="modal-add-to-cart-btn">
+                                        <i class="fa-solid fa-cart-plus me-2"></i>Agregar al carrito
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="index.js"></script>
+    <!-- Simulated Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 1.5rem;">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold" id="paymentModalLabel">
+                        <i class="fa-solid fa-shield-halved me-2 text-primary"></i>Pasarela de Pago Segura
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Interactive Virtual Credit Card -->
+                    <div class="payment-card mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold tracking-wider small">SHOPMASTER C&C PREMIUM</span>
+                            <i class="fa-brands fa-cc-visa fs-2"></i>
+                        </div>
+                        <div class="payment-card-chip my-2"></div>
+                        <div class="payment-card-num" id="vcard-number">•••• •••• •••• ••••</div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div style="font-size: 0.6rem; opacity: 0.8;">TARJETAHABIENTE</div>
+                                <div class="small fw-semibold" id="vcard-holder">NOMBRE COMPLETO</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.6rem; opacity: 0.8;">VENCE</div>
+                                <div class="small fw-semibold" id="vcard-expiry">MM/YY</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <form id="payment-form">
+                        <div class="mb-3">
+                            <label for="card-name" class="form-label fw-semibold small text-muted">Nombre del titular</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+                                <input type="text" class="form-control" id="card-name" placeholder="Ej. Juan Pérez" required>
+                                <div class="invalid-feedback">Ingresa el nombre impreso en la tarjeta.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="card-number" class="form-label fw-semibold small text-muted">Número de tarjeta</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-regular fa-credit-card"></i></span>
+                                <input type="text" class="form-control" id="card-number" placeholder="4000 1234 5678 9010" required>
+                                <div class="invalid-feedback">Debe contener exactamente 16 dígitos.</div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label for="card-expiry" class="form-label fw-semibold small text-muted">Vencimiento</label>
+                                <input type="text" class="form-control text-center" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
+                                <div class="invalid-feedback">Mes y año en formato MM/YY.</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="card-cvv" class="form-label fw-semibold small text-muted">CVC / CVV</label>
+                                <input type="password" class="form-control text-center" id="card-cvv" placeholder="•••" maxlength="3" required>
+                                <div class="invalid-feedback">Código de 3 dígitos.</div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-secondary py-2 border-0 d-flex align-items-center mb-4">
+                            <i class="fa-solid fa-lock text-success me-2 fs-5"></i>
+                            <span class="small text-muted">Monto total a pagar: <strong class="text-dark" id="payment-amount">$0.00</strong></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success-custom py-3 fw-bold" id="pay-now-btn">
+                                <i class="fa-solid fa-circle-check me-2"></i>Pagar ahora
+                            </button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Purchase and PDF download Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg text-center p-4" style="border-radius: 1.5rem;">
+                <div class="modal-body">
+                    <!-- Green Check Animation Placeholder -->
+                    <div class="mb-4">
+                        <i class="fa-solid fa-circle-check text-success" style="font-size: 5rem; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></i>
+                    </div>
+                    
+                    <h3 class="fw-bold mb-2">¡Compra Completada!</h3>
+                    <p class="text-muted mb-4">Tu pago ha sido procesado exitosamente por la simulación bancaria.</p>
+                    
+                    <div class="card bg-light border-0 p-3 mb-4 text-start">
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span class="text-muted">Establecimiento:</span>
+                            <span class="fw-semibold">ShopMaster Store C&C</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span class="text-muted">Transacción:</span>
+                            <span class="fw-semibold">Simulado</span>
+                        </div>
+                        <div class="d-flex justify-content-between small">
+                            <span class="text-muted">Facturación:</span>
+                            <span class="fw-bold text-success">Ticket Térmico (80mm)</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary-custom py-3 fw-bold" id="download-ticket-btn">
+                            <i class="fa-solid fa-file-pdf me-2"></i>Descargar Ticket PDF
+                        </button>
+                        <button class="btn btn-light" data-bs-dismiss="modal">Volver a la tienda</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Tech Footer (Bio and Skills presentation) -->
+    <footer class="tech-footer text-center text-md-start" id="tech-footer">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <!-- Circular Profile Photo -->
+                <div class="col-12 col-md-3 text-center mb-4 mb-md-0">
+                    <div class="profile-avatar-container" data-bs-toggle="modal" data-bs-target="#profileModal" title="Click para ver mi perfil">
+                        <div class="avatar-pulse"></div>
+                        <img src="FOTO_PORTADA_CARLOS.JPG" alt="ing. Carlos Sanchez" class="profile-avatar">
+                    </div>
+                    <div class="footer-developer-name">ing. Carlos Sanchez </div>
+                    <div class="small text-muted mt-1">Estudiante & Desarrollador</div>
+                </div>
+
+                <!-- Short Bio -->
+                <div class="col-12 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-bio-title">Biografía</h5>
+                    <p class="text-muted small lh-lg "> 
+                        
+                        ing. Carlos Sanchez – Estudiante y desarrollador web. Apasionado por la IA, el análisis de datos y el diseño de sistemas educativos orientados al desarrollo tecnológico y la programación.
+                    </p>
+                </div>
+
+                <!-- Skills Grid Section -->
+                <div class="col-12 col-md-5">
+                    <h5 class="footer-bio-title">Tecnologías y Skills</h5>
+                    <div class="skills-grid">
+                        <span class="skill-badge sql" title="SQL"><i class="fa-solid fa-database"></i> SQL</span>
+                        <span class="skill-badge powerbi" title="Power BI"><i class="fa-solid fa-chart-line"></i> Power BI</span>
+                        <span class="skill-badge python" title="Python"><i class="devicon-python-plain"></i> Python</span>
+                        <span class="skill-badge dotnet" title=".NET MAUI"><i class="devicon-dotnet-plain"></i> .NET MAUI</span>
+                        <span class="skill-badge html" title="HTML5"><i class="devicon-html5-plain"></i> HTML</span>
+                        <span class="skill-badge css" title="CSS3"><i class="devicon-css3-plain"></i> CSS</span>
+                        <span class="skill-badge js" title="JavaScript"><i class="devicon-javascript-plain"></i> JavaScript</span>
+                        <span class="skill-badge react" title="React"><i class="devicon-react-original"></i> React</span>
+                        <span class="skill-badge php" title="PHP"><i class="devicon-php-plain"></i> PHP</span>
+                        <span class="skill-badge csharp" title="C#"><i class="devicon-csharp-plain"></i> C#</span>
+                        <span class="skill-badge laravel" title="Laravel"><i class="devicon-laravel-plain"></i> Laravel</span>
+                        <span class="skill-badge excel" title="Excel"><i class="fa-regular fa-file-excel"></i> Excel</span>
+                        <span class="skill-badge android" title="Android ADB"><i class="devicon-android-plain"></i> Android ADB</span>
+                        <span class="skill-badge optimization" title="Grafos y Optimización"><i class="fa-solid fa-circle-nodes"></i> Grafos/Optim.</span>
+                        <span class="skill-badge ia" title="IA"><i class="fa-solid fa-brain"></i> IA (Gemini, GPT...)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Networks Links -->
+            <div class="text-center pt-3 border-top border-secondary-subtle">
+                
+                <h6 class="text-uppercase tracking-wider small mb-3 text-muted">Encuéntrame en mis Redes Sociales</h6>
+                <div class="social-icons-footer">
+            <a href="//www.youtube.com/@CarlosJesusSanchezGonzalez" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://github.com/Carlos0580" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/carlos.j.sanchez.g/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+            </div>
+
+            <!-- Footer Bottom text -->
+            <div class="footer-bottom text-center">
+                <p class="small text-muted mb-0">
+                    &copy; 2026 ShopMaster. Todos los derechos reservados. <br>
+                    <span class="footer-dev-span">Creado por <span class="creator-highlight">Ing. Carlos Sánchez</span></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Profile Detail Modal -->
+    <div class="modal fade profile-modal" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg border-secondary">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center p-4">
+                    <img src="FOTO_PORTADA_CARLOS.jpg" alt="Ing. Carlos Sánchez" class="profile-modal-img">
+                    <h3 class="fw-bold mb-1">Ing. Carlos Sánchez</h3>
+                    <p class="text-primary fw-semibold mb-3">Estudiante Universitario & Desarrollador Web Entry-level</p>
+                    
+                    <hr class="border-secondary my-3">
+                    
+                    <h6 class="text-uppercase tracking-wider small text-muted text-start mb-2">Sobre mí</h6>
+                    <p class="small text-start lh-lg mb-4 text-muted">
+                        Estudiante universitario y profesional de la ingeniería en sistemas. Apasionado por la inteligencia artificial aplicada, la ciencia de datos, y el desarrollo de sistemas educativos dinámicos. Disfruta enseñar tecnologías web y metodologías de desarrollo a las nuevas generaciones de ingenieros.
+                    </p>
+                    
+                    <h6 class="text-uppercase tracking-wider small text-muted text-start mb-3">Contacto Directo</h6>
+                    <div class="d-flex justify-content-around">
+                        <a href="mailto:info@carlossanchez.com" class="btn btn-outline-light btn-sm px-3"><i class="fa-regular fa-envelope me-2"></i>Email</a>
+                        <a href="https://wa.me/1234567890" target="_blank" class="btn btn-success btn-sm px-3"><i class="fa-brands fa-whatsapp me-2"></i>WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="custom-toast-container" id="toast-container"></div>
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+
+    <style>
+        /* Extra custom animations */
+        @keyframes floatAnim {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
 </body>
 </html>
